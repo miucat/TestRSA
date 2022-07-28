@@ -44,7 +44,6 @@ public class RSAEncryption {
             return new String(out_data, StandardCharsets.UTF_8);
         } catch (Exception ee) {
             Log.e("Exceptie:", ee.getMessage());
-
         }
         return null;
     }

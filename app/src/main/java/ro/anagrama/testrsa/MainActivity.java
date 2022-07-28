@@ -133,10 +133,10 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Date primite se proceseaza>> " + data.size() + "<<date", Toast.LENGTH_SHORT).show();
                         try {
                             for (String as : data) {
-                                try {
-                                    decriptat = rsa.Decrypt(as);
+                                decriptat = rsa.Decrypt(as);
+                                if (decriptat != null) {
                                     success++;
-                                } catch (Exception e) {
+                                } else {
                                     error++;
                                 }
                             }

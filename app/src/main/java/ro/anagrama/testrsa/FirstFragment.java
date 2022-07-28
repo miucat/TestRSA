@@ -49,7 +49,11 @@ public class FirstFragment extends Fragment {
     public void setTextAfterParse(int error, int success, String code) {
         binding.tvSuccessCounter.setText(String.valueOf(success));
         binding.tvErrCounter.setText(String.valueOf(error));
-        binding.codeDecompilat.setText(code);
+        if (code != null)
+            binding.codeDecompilat.setText(code);
+        else
+            binding.codeDecompilat.setText("o mare eroare");
+
     }
 
 }
