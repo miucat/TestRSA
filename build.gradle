@@ -1,0 +1,33 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+plugins {
+    id 'com.android.application' version '7.2.0-alpha04' apply false
+    id 'com.android.library' version '7.2.0-alpha04' apply false
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+ext {
+    // App dependencies
+    supportLibraryVersion = '27.1.1'
+    gsonVersion = '2.8.0'
+    calligraphyVersion = '2.2.0'
+
+    rx2FastAndroidNetworking = '1.0.0'
+
+    dagger2Version = '2.8'
+    rxjava2Version = '2.2.9'
+    rxandroidVersion = '2.0.1'
+    butterKnifeVersion = '8.5.1'
+    placeholderviewVersion = '0.6.1'
+    debugDBVersion = '1.0.0'
+    timberVersion = '4.5.1'
+
+    arch = "1.1.1"
+
+    //Test dependencies
+    junitVersion = '4.12'
+    espressoVersion = '2.2.2'
+    mockitoVersion = '2.7.1'
+}
