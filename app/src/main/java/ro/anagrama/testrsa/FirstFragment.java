@@ -56,4 +56,8 @@ public class FirstFragment extends Fragment {
 
     }
 
+    public void setPem( String pem) {
+        binding.pemKey.setText(pem);
+    }
+
 }

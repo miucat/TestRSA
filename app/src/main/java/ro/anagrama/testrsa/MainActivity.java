@@ -79,8 +79,10 @@ public class MainActivity extends AppCompatActivity {
 //            Log.e("PUBLIC:",KeyUtils.getRSAPublicKeyAsXMLString((RSAPublicKey) KeyUtils.getRSAPublicKey(KeyUtils.KeyNameRSA)));
 
             //show public key in PEM format
-            Log.e("PEMPublic: ", KeyUtils.toPEM(KeyUtils.getRSAPublicKey(KeyUtils.KeyNameRSA)));
-
+//            Log.e("PEMPublic: ", KeyUtils.toPEM(KeyUtils.getRSAPublicKey(KeyUtils.KeyNameRSA)));
+            if (navHostFragment instanceof FirstFragment) {
+                ((FirstFragment) navHostFragment).setPem(KeyUtils.toPEM(KeyUtils.getRSAPublicKey(KeyUtils.KeyNameRSA)));
+            }
             //create RSAEncryptionInstance
             RSAEncryption rsa = new RSAEncryption();
             //set private key for decrypt; if need to encrypt will set public key
@@ -131,17 +133,13 @@ public class MainActivity extends AppCompatActivity {
                         int error = 0;
                         String decriptat = "something went wrong";
                         Toast.makeText(MainActivity.this, "Date primite se proceseaza>> " + data.size() + "<<date", Toast.LENGTH_SHORT).show();
-                        try {
-                            for (String as : data) {
-                                decriptat = rsa.Decrypt(as);
-                                if (decriptat != null) {
-                                    success++;
-                                } else {
-                                    error++;
-                                }
+                        for (String as : data) {
+                            decriptat = rsa.Decrypt(as);
+                            if (decriptat != null) {
+                                success++;
+                            } else {
+                                error++;
                             }
-                        } catch (Exception e) {
-                            Log.e("Eroare decriptare", e.getLocalizedMessage());
                         }
                         if (navHostFragment instanceof FirstFragment) {
                             ((FirstFragment) navHostFragment).setTextAfterParse(error, success, decriptat);
