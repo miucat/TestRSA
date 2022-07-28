@@ -129,14 +129,12 @@ public class MainActivity extends AppCompatActivity {
                     public void onNext(List<String> data) {
                         int success = 0;
                         int error = 0;
+                        String decriptat = "something went wrong";
                         Toast.makeText(MainActivity.this, "Date primite se proceseaza>> " + data.size() + "<<date", Toast.LENGTH_SHORT).show();
-                        if (navHostFragment instanceof FirstFragment) {
-                            ((FirstFragment) navHostFragment).setTextAfterParse(error, success);
-                        }
                         try {
                             for (String as : data) {
                                 try {
-                                    String decriptat = rsa.Decrypt(as);
+                                    decriptat = rsa.Decrypt(as);
                                     success++;
                                 } catch (Exception e) {
                                     error++;
@@ -146,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
                             Log.e("Eroare decriptare", e.getLocalizedMessage());
                         }
                         if (navHostFragment instanceof FirstFragment) {
-                            ((FirstFragment) navHostFragment).setTextAfterParse(error, success);
+                            ((FirstFragment) navHostFragment).setTextAfterParse(error, success, decriptat);
                         }
                         binding.loading.setVisibility(View.GONE);
                         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);

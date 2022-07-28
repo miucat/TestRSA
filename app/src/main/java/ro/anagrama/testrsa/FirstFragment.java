@@ -46,9 +46,10 @@ public class FirstFragment extends Fragment {
     }
 
 
-    public void setTextAfterParse(int error, int success) {
+    public void setTextAfterParse(int error, int success, String code) {
         binding.tvSuccessCounter.setText(String.valueOf(success));
         binding.tvErrCounter.setText(String.valueOf(error));
+        binding.codeDecompilat.setText(code);
     }
 
 }

@@ -2,8 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:id="@+id/FirstFragment"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".FirstFragment">
 
@@ -11,9 +11,9 @@
         android:id="@+id/textview_first"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:padding="10dp"
         android:text="Code success:"
         android:textSize="18sp"
-        android:padding="10dp"
         app:layout_constraintEnd_toStartOf="@+id/tv_success_counter"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -21,22 +21,22 @@
     <TextView
         android:id="@+id/tv_success_counter"
         android:layout_width="0dp"
-        android:textSize="18sp"
-        android:padding="10dp"
-        android:textStyle="bold"
+        android:layout_height="wrap_content"
         android:gravity="end"
-        app:layout_constraintTop_toTopOf="parent"
+        android:padding="10dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/textview_first"
-        android:layout_height="wrap_content"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textview_second"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:padding="10dp"
         android:text="Code error:"
         android:textSize="18sp"
-        android:padding="10dp"
         app:layout_constraintEnd_toStartOf="@+id/tv_err_counter"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_success_counter" />
@@ -44,14 +44,27 @@
     <TextView
         android:id="@+id/tv_err_counter"
         android:layout_width="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:textSize="18sp"
-        android:padding="10dp"
+        android:layout_height="wrap_content"
         android:gravity="end"
+        android:padding="10dp"
+        android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/tv_success_counter"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/textview_second"
-        android:layout_height="wrap_content"/>
+        app:layout_constraintTop_toBottomOf="@+id/tv_success_counter" />
+
+    <TextView
+        android:id="@+id/code_decompilat"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:padding="10dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_err_counter" />
+
     <Button
         android:id="@+id/button_first"
         android:layout_width="wrap_content"
