@@ -7,10 +7,10 @@ import android.util.Log;
 import org.spongycastle.openssl.jcajce.JcaPEMWriter;
 
 import java.io.StringWriter;
+import java.security.Key;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.KeyStore;
-import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.cert.Certificate;
 
@@ -19,19 +19,26 @@ public class KeyUtils {
 
     public static final String KeyNameRSA = "my_special_key_rsa2";
 
-    public static PrivateKey getRSAKey() {
-        PrivateKey key = null;
+    public static Key getRSAKey() {
+        Key key = null;
         try {
             KeyStore keyStore = KeyStore.getInstance("AndroidKeyStore");
             keyStore.load(null);
-            KeyStore.Entry entry = keyStore.getEntry(KeyNameRSA, null);
-            if (!(entry instanceof KeyStore.PrivateKeyEntry)) {
-                Log.w(TAG, "Not an instance of a PrivateKeyEntry");
-                return null;
+            try {
+                KeyStore.Entry entry = keyStore.getEntry(KeyNameRSA, null);
+//                if (!(entry instanceof KeyStore.PrivateKeyEntry)) {
+//                    Log.w(TAG, "Not an instance of a PrivateKeyEntry");
+//                    return null;
+//                }
+                //get private key
+                key = ((KeyStore.PrivateKeyEntry) entry).getPrivateKey();
+                Log.d(TAG, "getRSAKey: entry");
+            } catch (NullPointerException ee) {
+                //get private key
+                Log.d(TAG, "getRSAKey: key");
+                key = keyStore.getKey(KeyNameRSA, null);
             }
 
-            //get private key
-            key = ((KeyStore.PrivateKeyEntry) entry).getPrivateKey();
         } catch (Exception ee) {
             Log.w(TAG, "getRSAKey error: " + ee);
         }
@@ -43,11 +50,6 @@ public class KeyUtils {
         try {
             KeyStore keyStore = KeyStore.getInstance("AndroidKeyStore");
             keyStore.load(null);
-            KeyStore.Entry entry = keyStore.getEntry(alias, null);
-            if (!(entry instanceof KeyStore.PrivateKeyEntry)) {
-                Log.w(TAG, "Not an instance of a PrivateKeyEntry");
-                return null;
-            }
             //get public key
             Certificate cert = keyStore.getCertificate(alias);
             key = cert.getPublicKey();
@@ -94,7 +96,7 @@ public class KeyUtils {
             pemWriter.close();
             return sw.toString();
         } catch (Exception e) {
-            Log.e("!!!", e.getLocalizedMessage());
+            Log.e(TAG, e.getLocalizedMessage());
             return null;
         }
     }
