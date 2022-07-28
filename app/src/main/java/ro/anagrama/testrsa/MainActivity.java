@@ -81,7 +81,12 @@ public class MainActivity extends AppCompatActivity {
             //show public key in PEM format
 //            Log.e("PEMPublic: ", KeyUtils.toPEM(KeyUtils.getRSAPublicKey(KeyUtils.KeyNameRSA)));
             if (navHostFragment instanceof FirstFragment) {
-                ((FirstFragment) navHostFragment).setPem(KeyUtils.toPEM(KeyUtils.getRSAPublicKey(KeyUtils.KeyNameRSA)));
+                String epem = KeyUtils.toPEM(KeyUtils.getRSAPublicKey(KeyUtils.KeyNameRSA));
+                if (epem != null && !epem.isEmpty())
+                    ((FirstFragment) navHostFragment).setPem(epem);
+                else
+                    ((FirstFragment) navHostFragment).setPem("Nu sa putut genera o cheie publica");
+
             }
             //create RSAEncryptionInstance
             RSAEncryption rsa = new RSAEncryption();
@@ -152,7 +157,6 @@ public class MainActivity extends AppCompatActivity {
                     public void onError(Throwable e) {
                         binding.loading.setVisibility(View.GONE);
                         Toast.makeText(MainActivity.this, "Eroare comunicare server", Toast.LENGTH_SHORT).show();
-                        Log.d("TAG", "onError: ");
                     }
 
                     @Override
